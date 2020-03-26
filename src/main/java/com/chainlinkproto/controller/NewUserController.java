@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.chainlinkproto.model.Users;
-import com.chainlinkproto.service.NewUserService;
+import com.chainlinkproto.service.UserService;
 
 @Controller
 public class NewUserController {
 
 	@Autowired
-	NewUserService newUserService;
+	UserService newUserService;
 	
 	
 	@GetMapping("/newUser")
