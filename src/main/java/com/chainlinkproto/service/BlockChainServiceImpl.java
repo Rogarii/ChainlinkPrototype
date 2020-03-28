@@ -1,36 +1,50 @@
 package com.chainlinkproto.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.math.BigDecimal;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Wallet;
+import org.web3j.crypto.WalletFile;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.methods.response.EthGetTransactionReceipt;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.Transfer;
+import org.web3j.utils.Convert.Unit;
+import org.web3j.utils.Numeric;
 
-import com.chainlinkproto.dao.LoginRepository;
-import com.chainlinkproto.model.Users;
 
 @Service
 public class BlockChainServiceImpl implements BlockChainService{
-
-	@Autowired
-	LoginRepository dao;
 	
-	public File getUserWallet(Users user) {
+	private static final String ADMIN_PK = "abade1674f3bdfafb5f3ba3ee19771db279dd32a4edd3ae11c94b332255eb7d8";
+	Web3j web3 = Web3j.build(new HttpService("HTTP://127.0.0.1:7545"));
+
+	@Override
+	public void initiateNewWallet(WalletFile wallet, String password) {
 		try {
-			Path tempDir = Files.createTempDirectory("walletsGet");
-			File file = new File(tempDir.toString() + "\\" + user.getId() + "wallet.json");
-			OutputStream output = new FileOutputStream(file);
-			output.write(user.getWalletFile());
-			output.close();
-			return file;
-		} catch (IOException e) {
+			Credentials toCreds = Credentials.create(Wallet.decrypt(password, wallet));
+			Credentials fromCreds = Credentials.create(ECKeyPair.create(Numeric.toBigInt(ADMIN_PK)));
+			
+			TransactionReceipt receipt = Transfer.sendFunds(web3, fromCreds, toCreds.getAddress(), BigDecimal.valueOf(10), Unit.ETHER).send();
+			
+			String transactionHash = receipt.getTransactionHash();
+			
+			Optional<TransactionReceipt> transactionReceipt = null;
+			do {
+			  EthGetTransactionReceipt ethGetTransactionReceiptResp = web3.ethGetTransactionReceipt(transactionHash).send();
+			  transactionReceipt = ethGetTransactionReceiptResp.getTransactionReceipt();
+
+			  Thread.sleep(3000);
+			} while(!transactionReceipt.isPresent());
+			
+		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
 	}
 
+	
 }

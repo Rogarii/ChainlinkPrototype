@@ -1,19 +1,15 @@
 package com.chainlinkproto.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.web3j.crypto.CipherException;
-import org.web3j.crypto.WalletUtils;
+import org.web3j.crypto.ECKeyPair;
+import org.web3j.crypto.Keys;
+import org.web3j.crypto.Wallet;
+import org.web3j.crypto.WalletFile;
 
 import com.chainlinkproto.dao.LoginRepository;
 import com.chainlinkproto.model.Users;
@@ -27,24 +23,36 @@ public class UserServiceImpl implements UserService {
    
    @Autowired
    private PasswordEncoder encoder;
+   
+   @Autowired
+   private BlockChainService blockChainService;
 
    @Override
    public void createNewUser(Users user, String password) {
 	   user.setPasswordHash(encoder.encode(password));
+	   ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	   ObjectOutputStream out = null;
 	   try {
-		   	Path tempDir = Files.createTempDirectory("walletsCreate");
-		   	String filename = WalletUtils.generateNewWalletFile(encoder.encode(password), new File(tempDir.toUri()));
-		   	File walletFile = new File(tempDir.toString()  + "\\" + filename);
-		   	byte[] fileBytes = new byte[(int) walletFile.length()];	   
-		   	FileInputStream fis = new FileInputStream(walletFile);
-		   	fis.read(fileBytes);
-		   	fis.close();
-		   	user.setWalletFile(fileBytes);
+		   	ECKeyPair keyPair = Keys.createEcKeyPair();
+		   	WalletFile wallet = Wallet.createStandard(password, keyPair);
+//		   	
+//		   	out = new ObjectOutputStream(bos);
+//		   	out.writeObject(wallet);
+//		   	out.flush();
+//		   	byte[] walletBytes = bos.toByteArray();  
+//		   	user.setWalletFile(walletBytes);
+		   	blockChainService.initiateNewWallet(wallet, password);
 			dao.saveNewUser(user);
-	   } catch (InvalidAlgorithmParameterException | NoSuchAlgorithmException | NoSuchProviderException | CipherException
-			| IOException e) {
-		e.printStackTrace();
-	   }
+			bos.close();
+	   }catch(Exception e) {
+		   	e.printStackTrace();
+	   }finally {
+		   	try {
+		   		bos.close();
+		   	}catch(Exception e) {
+		   		e.printStackTrace();
+		   	}
+	   	}
 
    }
 

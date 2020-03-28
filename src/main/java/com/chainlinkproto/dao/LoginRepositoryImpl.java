@@ -16,12 +16,12 @@ import com.chainlinkproto.model.UserAuthority;
 
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class LoginRepositoryImpl implements LoginRepository {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	   
-	@SuppressWarnings("unchecked")
 	@Override
 	public Users getUserByEmail(String emailAddress) {
 		   Query<Users> query = sessionFactory.getCurrentSession().createQuery("FROM Users u WHERE u.emailAddress = :emailAddress");

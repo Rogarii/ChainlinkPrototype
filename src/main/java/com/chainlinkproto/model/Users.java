@@ -43,8 +43,7 @@ public class Users implements Serializable{
 	@Column(name = "PasswordHash", nullable = false)
 	private String passwordHash;
 	
-	@NotEmpty
-	@Column(name = "WalletFile", nullable = false)
+	@Column(name = "WalletFile")
 	private byte[] walletFile;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user", fetch = FetchType.EAGER)
