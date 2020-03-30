@@ -16,5 +16,6 @@
   <body>
     <h1>User Dashboard</h1>
 		<a href="doLogout" class="btn btn-danger">Logout</a>
+		<a href="newAccount" class="btn btn-success">New Account Setup</a>
   </body>
 </html>

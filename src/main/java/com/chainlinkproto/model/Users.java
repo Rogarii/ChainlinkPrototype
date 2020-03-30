@@ -43,8 +43,8 @@ public class Users implements Serializable{
 	@Column(name = "PasswordHash", nullable = false)
 	private String passwordHash;
 	
-	@Column(name = "WalletFile")
-	private byte[] walletFile;
+	@Column(name = "WalletKey")
+	private String walletKey;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<UserAuthority> userAuthority = new HashSet<>();
@@ -88,13 +88,13 @@ public class Users implements Serializable{
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
-	
-	public byte[] getWalletFile() {
-		return walletFile;
+
+	public String getWalletKey() {
+		return walletKey;
 	}
 
-	public void setWalletFile(byte[] walletFile) {
-		this.walletFile = walletFile;
+	public void setWalletKey(String walletKey) {
+		this.walletKey = walletKey;
 	}
 
 	public Set<UserAuthority> getUserAuthority() {

@@ -1,7 +1,7 @@
 package com.chainlinkproto.service;
 
-import org.web3j.crypto.WalletFile;
+import com.chainlinkproto.model.Users;
 
 public interface BlockChainService {
-	public void initiateNewWallet(WalletFile wallet, String password);
+	public Users initiateNewWallet(Users user);
 }
