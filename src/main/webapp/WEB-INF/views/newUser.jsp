@@ -43,7 +43,7 @@
 	    			<div class="col">
 		    			<div class="form-group">
 		    				<form:label path="password">Password</form:label>
-	    					<form:input path="password" class="form-control" placeholder="Password" type="password" required="required"/>
+	    					<form:password path="password" class="form-control" placeholder="Password" required="required"/>
 		    			</div>				
 	    			</div>
 	    		</div>
@@ -51,7 +51,7 @@
 	    			<div class="col">
 		    			<div class="form-group">
 		    				<form:label path="password2">Confirm Password</form:label>
-	    					<form:input path="password2" class="form-control" placeholder="Confirm Password" type="text" required="required"/>
+	    					<form:password path="password2" class="form-control" placeholder="Confirm Password" required="required"/>
 		    			</div>				
 	    			</div>
 	    		</div>
