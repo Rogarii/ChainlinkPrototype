@@ -4,14 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.chainlinkproto.dao.LoginRepository;
+import com.chainlinkproto.dao.CLPDao;
+import com.chainlinkproto.model.Accounts;
 import com.chainlinkproto.model.Users;
 
 @Service
 public class UserServiceImpl implements UserService {
 
    @Autowired
-   private LoginRepository dao;
+   private CLPDao dao;
    
    @Autowired
    private PasswordEncoder encoder;
@@ -28,4 +29,9 @@ public class UserServiceImpl implements UserService {
 		   e.printStackTrace();
 	   } 
    }
+
+	@Override
+	public void createNewAccount(Accounts account, Integer id) {
+		dao.saveNewAccount(account, id);
+	}
 }

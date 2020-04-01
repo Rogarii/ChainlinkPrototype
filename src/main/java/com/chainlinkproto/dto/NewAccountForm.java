@@ -3,6 +3,7 @@ package com.chainlinkproto.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 public class NewAccountForm implements Serializable{
 
@@ -31,109 +32,108 @@ public class NewAccountForm implements Serializable{
 	private String state;
 	
 	@NotNull
-	private int zip;
+	private String zip;
 	
 	@NotNull
-	private int primaryPhone;
+	private String primaryPhone;
 	
-	private int cellPhone;
+	private String cellPhone;
 	
-	private int fax;
-	
+	private String fax;
 
 	public String getAccountType() {
 		return accountType;
-	}
-
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
 	}
 
 	public String getAccountTitle() {
 		return accountTitle;
 	}
 
-	public void setAccountTitle(String accountTitle) {
-		this.accountTitle = accountTitle;
-	}
-
 	public String getCitizenship() {
 		return citizenship;
-	}
-
-	public void setCitizenship(String citizenship) {
-		this.citizenship = citizenship;
 	}
 
 	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public String getAddress1() {
 		return address1;
-	}
-
-	public void setAddress1(String address1) {
-		this.address1 = address1;
 	}
 
 	public String getAddress2() {
 		return address2;
 	}
 
-	public void setAddress2(String address2) {
-		this.address2 = address2;
-	}
-
 	public String getCity() {
 		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
 	}
 
 	public String getState() {
 		return state;
 	}
 
+	public String getZip() {
+		return zip;
+	}
+
+	public String getPrimaryPhone() {
+		return primaryPhone;
+	}
+
+	public String getCellPhone() {
+		return cellPhone;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public void setAccountTitle(String accountTitle) {
+		this.accountTitle = accountTitle;
+	}
+
+	public void setCitizenship(String citizenship) {
+		this.citizenship = citizenship;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	public void setState(String state) {
 		this.state = state;
 	}
 
-	public int getZip() {
-		return zip;
-	}
-
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
-	public int getPrimaryPhone() {
-		return primaryPhone;
-	}
-
-	public void setPrimaryPhone(int primaryPhone) {
+	public void setPrimaryPhone(String primaryPhone) {
 		this.primaryPhone = primaryPhone;
 	}
 
-	public int getCellPhone() {
-		return cellPhone;
-	}
-
-	public void setCellPhone(int cellPhone) {
+	public void setCellPhone(String cellPhone) {
 		this.cellPhone = cellPhone;
 	}
 
-	public int getFax() {
-		return fax;
-	}
-
-	public void setFax(int fax) {
+	public void setFax(String fax) {
 		this.fax = fax;
 	}
 }

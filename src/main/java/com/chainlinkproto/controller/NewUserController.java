@@ -55,7 +55,7 @@ public class NewUserController {
 			redirectAttrs.addAttribute("unknownError", true);
 			return "redirect:/newUser";
 		}
-		redirectAttrs.addAttribute("accountCreation", true);
+		redirectAttrs.addAttribute("userCreation", true);
 		return "redirect:/login";
 	}
 }

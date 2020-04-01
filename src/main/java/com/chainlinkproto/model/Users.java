@@ -48,60 +48,82 @@ public class Users implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<UserAuthority> userAuthority = new HashSet<>();
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user", fetch = FetchType.EAGER)
+	private Set<UserInbox> userInbox = new HashSet<>();
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user", fetch = FetchType.EAGER)
+	private Set<Accounts> accounts = new HashSet<>();
 
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
 	public String getLastName() {
 		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getEmailAddress() {
 		return emailAddress;
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-
 	public String getPasswordHash() {
 		return passwordHash;
-	}
-
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
 	}
 
 	public String getWalletKey() {
 		return walletKey;
 	}
 
-	public void setWalletKey(String walletKey) {
-		this.walletKey = walletKey;
-	}
-
 	public Set<UserAuthority> getUserAuthority() {
 		return userAuthority;
 	}
 
+	public Set<UserInbox> getUserInbox() {
+		return userInbox;
+	}
+
+	public Set<Accounts> getAccounts() {
+		return accounts;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
+	public void setWalletKey(String walletKey) {
+		this.walletKey = walletKey;
+	}
+
 	public void setUserAuthority(Set<UserAuthority> userAuthority) {
 		this.userAuthority = userAuthority;
+	}
+
+	public void setUserInbox(Set<UserInbox> userInbox) {
+		this.userInbox = userInbox;
+	}
+
+	public void setAccounts(Set<Accounts> accounts) {
+		this.accounts = accounts;
 	}
 }

@@ -12,12 +12,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chainlinkproto.model.Users;
+import com.chainlinkproto.model.Accounts;
 import com.chainlinkproto.model.UserAuthority;
 
 @Repository
 @Transactional
 @SuppressWarnings("unchecked")
-public class LoginRepositoryImpl implements LoginRepository {
+public class CLPDaoImpl implements CLPDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -35,9 +36,24 @@ public class LoginRepositoryImpl implements LoginRepository {
 		UserAuthority userAuth = new UserAuthority();
 		userAuth.setRoleAuth("ROLE_USER");
 		userAuth.setUser(user);
-		Set<UserAuthority> authorities = new HashSet<UserAuthority>();
-		authorities.add(userAuth);
-		user.setUserAuthority(authorities);
+		user.getUserAuthority().add(userAuth);
 		session.persist(user);
+	}
+
+	@Override
+	public Users getUserById(Integer id) {
+		 Query<Users> query = sessionFactory.getCurrentSession().createQuery("FROM Users u WHERE u.id = :id");
+		   query.setParameter("id", id);
+		   return query.uniqueResult();   
+	}
+
+	@Override
+	public void saveNewAccount(Accounts account, Integer id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Users user = getUserById(id);
+		account.setUser(user);
+		//TODO set up the default group and enterprise ID's to be tied to account object
+		user.getAccounts().add(account);
+		session.merge(user);
 	}
 }

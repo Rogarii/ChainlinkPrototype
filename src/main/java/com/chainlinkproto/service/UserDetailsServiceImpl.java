@@ -6,14 +6,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.chainlinkproto.dao.LoginRepository;
+import com.chainlinkproto.dao.CLPDao;
 import com.chainlinkproto.model.LoginUserDetails;
 import com.chainlinkproto.model.Users;
 
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Autowired
-	private LoginRepository loginRepository;
+	private CLPDao loginRepository;
 	
 	@Transactional(readOnly = true)
 	@Override
