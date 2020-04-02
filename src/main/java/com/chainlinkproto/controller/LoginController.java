@@ -2,6 +2,7 @@ package com.chainlinkproto.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,13 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.chainlinkproto.model.LoginUserDetails;
 import com.chainlinkproto.model.Users;
+import com.chainlinkproto.service.UserService;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	UserService userService;
 
 	@GetMapping("/")
 	public String home() {
@@ -45,6 +50,9 @@ public class LoginController {
 		validatePrincipal(authentication.getPrincipal());
 		Users user = ((LoginUserDetails)authentication.getPrincipal()).getUserDetails();
 		session.setAttribute("userId", user.getId());
+		if(userService.getUserById(user.getId()).getAccounts().isEmpty()) {
+			return "redirect:/newAccount";
+		}
 		return "redirect:/dashboard";
 	}
 	

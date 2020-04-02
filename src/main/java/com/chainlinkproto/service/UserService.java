@@ -8,4 +8,6 @@ public interface UserService {
 	public void createNewUser(Users user, String password);
 	
 	public void createNewAccount(Accounts account, Integer id);
+	
+	public Users getUserById(Integer id);
 }

@@ -1,6 +1,8 @@
 package com.chainlinkproto.dao;
 
 import com.chainlinkproto.model.Accounts;
+import com.chainlinkproto.model.EnterpriseAffiliates;
+import com.chainlinkproto.model.UserGroups;
 import com.chainlinkproto.model.Users;
 
 public interface CLPDao{
@@ -12,4 +14,8 @@ public interface CLPDao{
 	public void saveNewUser(Users user);
 	
 	public void saveNewAccount(Accounts account, Integer id);
+	
+	public UserGroups getGroupById(Integer id);
+	
+	public EnterpriseAffiliates getEnterpriseById(Integer id);
 }

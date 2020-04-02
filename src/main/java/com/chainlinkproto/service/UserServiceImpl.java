@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
 	public void createNewAccount(Accounts account, Integer id) {
 		dao.saveNewAccount(account, id);
 	}
+
+	@Override
+	public Users getUserById(Integer id) {
+		return dao.getUserById(id);
+	}
 }

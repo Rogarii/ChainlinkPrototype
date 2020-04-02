@@ -47,6 +47,9 @@ public class Contracts implements Serializable {
 	private String bcKey;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contract", fetch = FetchType.EAGER)
+	private Set<ContractAccountApproval> contractApprovals = new HashSet<>();
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contract", fetch = FetchType.EAGER)
 	private Set<UserInbox> userInbox = new HashSet<>();
 	
 	@ManyToMany(mappedBy = "contracts")
@@ -73,6 +76,10 @@ public class Contracts implements Serializable {
 
 	public String getBcKey() {
 		return bcKey;
+	}
+
+	public Set<ContractAccountApproval> getContractApprovals() {
+		return contractApprovals;
 	}
 
 	public Set<UserInbox> getUserInbox() {
@@ -105,6 +112,10 @@ public class Contracts implements Serializable {
 
 	public void setBcKey(String bcKey) {
 		this.bcKey = bcKey;
+	}
+
+	public void setContractApprovals(Set<ContractAccountApproval> contractApprovals) {
+		this.contractApprovals = contractApprovals;
 	}
 
 	public void setUserInbox(Set<UserInbox> userInbox) {
