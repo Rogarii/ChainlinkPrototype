@@ -14,9 +14,20 @@ contract RoyaltyContract{
     //Array to hold the numerous royalty holders of the contract
     mapping(address => holder) private royaltyHolders;
     
+    //array of all addresses in the royaltyHolders mapping
     address[] private holderAddresses;
     
+    //total number of royaltyHolders
     uint256 private totalHolders = 0;
+    
+    //musical property title associated with contract
+    string private propertyTitle;
+    
+    //musical property artist associated with contract
+    string private propertyArtist;
+    
+    //id of property in local sql db
+    uint256 private propertyId;
   
     //Object to Represent the Royalty Holders of the contract  
     struct holder {
@@ -32,11 +43,15 @@ contract RoyaltyContract{
     }
     
     //Constructor statement - adds initial user to contract
-    constructor(string memory firstName, string memory lastName, uint256 dateAdded, uint256 mechRoy, uint256 prefRoy, uint256 id) public {
+    constructor(string memory firstName, string memory lastName, uint256 dateAdded, uint256 mechRoy, uint256 prefRoy,
+                uint256 id, string memory propTitle, string memory propArtist, uint256 propId) public {
         holder memory newHolder = holder(firstName, lastName, dateAdded, mechRoy, prefRoy, id, false, dateAdded, true);
         royaltyHolders[msg.sender] = newHolder;
         holderAddresses.push(msg.sender);
         totalHolders++;
+        propertyTitle = propTitle;
+        propertyArtist = propArtist;
+        propertyId = propId;
     }
     
     //adds new holder to contract if the address sending message is authorized
@@ -51,6 +66,7 @@ contract RoyaltyContract{
         unApproveAll();
     }
     
+    //approves the contract for the user sending request
     function approveContract(uint256 currentDate, string memory firstName, string memory lastName) public {
         require(royaltyHolders[msg.sender].authorized, "Unauthorized User");
         require(!royaltyHolders[msg.sender].approved, "Contract Already Approved");
@@ -109,4 +125,13 @@ contract RoyaltyContract{
         return holderAddresses;
     }
     
+    //returns property title and artist for associated musical property
+    function getPropertyInfo() public view returns (string memory, string memory){
+        return (propertyTitle, propertyArtist);
+    }
+    
+    //returns sql db id for property
+    function getPropertyId() public view returns (uint256){
+        return propertyId;
+    }
 }
