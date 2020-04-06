@@ -3,7 +3,6 @@ package com.chainlinkproto.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 public class NewAccountForm implements Serializable{
 

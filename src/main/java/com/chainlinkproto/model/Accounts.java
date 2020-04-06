@@ -19,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -103,9 +102,6 @@ public class Accounts implements Serializable{
 	private BigDecimal fax;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.EAGER)
-	private Set<ContractAccountApproval> contractApprovals = new HashSet<>();
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.EAGER)
 	private Set<IntelProperties> intelProperties = new HashSet<>();
 	
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -182,10 +178,6 @@ public class Accounts implements Serializable{
 
 	public BigDecimal getFax() {
 		return fax;
-	}
-
-	public Set<ContractAccountApproval> getContractApprovals() {
-		return contractApprovals;
 	}
 
 	public Set<IntelProperties> getIntelProperties() {
@@ -266,10 +258,6 @@ public class Accounts implements Serializable{
 
 	public void setFax(BigDecimal fax) {
 		this.fax = fax;
-	}
-
-	public void setContractApprovals(Set<ContractAccountApproval> contractApprovals) {
-		this.contractApprovals = contractApprovals;
 	}
 
 	public void setIntelProperties(Set<IntelProperties> intelProperties) {

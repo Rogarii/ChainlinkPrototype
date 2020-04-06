@@ -17,5 +17,6 @@
     <h1>User Dashboard</h1>
 		<a href="doLogout" class="btn btn-danger">Logout</a>
 		<a href="newAccount" class="btn btn-success">New Account Setup</a>
+		<a href="properties" class="btn btn-primary">Intellectual Properties</a>
   </body>
 </html>

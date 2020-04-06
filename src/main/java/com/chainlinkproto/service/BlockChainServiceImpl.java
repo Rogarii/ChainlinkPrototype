@@ -2,7 +2,7 @@ package com.chainlinkproto.service;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Date;
+import java.sql.Timestamp;
 
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;
@@ -16,6 +16,9 @@ import org.web3j.utils.Convert.Unit;
 import org.web3j.utils.Numeric;
 
 import com.chainlinkproto.contracts.RoyaltyContract;
+import com.chainlinkproto.model.Accounts;
+import com.chainlinkproto.model.Contracts;
+import com.chainlinkproto.model.IntelProperties;
 import com.chainlinkproto.model.Users;
 
 @Service
@@ -39,20 +42,22 @@ public class BlockChainServiceImpl implements BlockChainService{
 	}
 
 	@Override
-	public boolean initiateNewRoyaltyContract(Credentials creds, Users user) throws Exception {
-//		RoyaltyContract contract = null;
-//		try {
-//			contract = RoyaltyContract.deploy(web3, creds, new DefaultGasProvider(), user.getFirstName(), user.getLastName(),
-//					BigInteger.valueOf(new Date().getTime()), BigInteger.valueOf(100000), BigInteger.valueOf(100000), BigInteger.valueOf(5)).send();
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println(contract.checkApprovals().send());
-//		contract.approveContract(BigInteger.valueOf(new Date().getTime()), user.getFirstName(), user.getLastName()).send();
-//		System.out.println(contract.checkApprovals().send());
-//		System.out.println(contract.getAllRoyaltyHolders().send());
-//		
-//		return contract.isValid();
-		return false;
+	public Contracts initiateNewRoyaltyContract(Credentials creds, Accounts account, IntelProperties property) throws Exception {
+		RoyaltyContract royaltyContract = null;
+		try {
+			royaltyContract = RoyaltyContract.deploy(web3, creds, new DefaultGasProvider(), account.getUser().getFirstName(), account.getUser().getLastName(),
+					BigInteger.valueOf(System.currentTimeMillis()), BigInteger.valueOf(100000), BigInteger.valueOf(100000), 
+					BigInteger.valueOf(5), property.getMetaArtist(), property.getMetaArtist(), BigInteger.valueOf(property.getId())).send();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		Contracts contract = new Contracts();
+		contract.setContractType("ROY");
+		contract.setDateCreated(new Timestamp(System.currentTimeMillis()));
+		contract.setDateModified(new Timestamp(System.currentTimeMillis()));
+		contract.setBcKey(royaltyContract.getContractAddress());
+		contract.getAccounts().add(account);
+		contract.getIntelProperties().add(property);		
+		return contract;
 	}
 }

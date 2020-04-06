@@ -42,11 +42,9 @@ public class IntelProperties implements Serializable{
 	@Column(name = "PropName")
 	private String propName;
 	
-	@NotEmpty
 	@Column(name = "DateAdded")
 	private Timestamp dateAdded;
 	
-	@NotEmpty
 	@Column(name = "DateModified")
 	private Timestamp dateModified;
 	

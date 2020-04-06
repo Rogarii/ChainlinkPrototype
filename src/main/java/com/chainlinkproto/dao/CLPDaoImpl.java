@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chainlinkproto.model.Users;
 import com.chainlinkproto.model.Accounts;
 import com.chainlinkproto.model.EnterpriseAffiliates;
+import com.chainlinkproto.model.IntelProperties;
 import com.chainlinkproto.model.UserAuthority;
 import com.chainlinkproto.model.UserGroups;
 
@@ -74,4 +75,17 @@ public class CLPDaoImpl implements CLPDao {
 		query.setParameter("id", id);
 		return query.uniqueResult();
 	}
+
+	@Override
+	public void saveNewProperty(IntelProperties property) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(property);
+	}
+
+	@Override
+	public void updateProperty(IntelProperties property) {
+		Session session = this.sessionFactory.getCurrentSession();
+		session.merge(property);
+	}
+	
 }
