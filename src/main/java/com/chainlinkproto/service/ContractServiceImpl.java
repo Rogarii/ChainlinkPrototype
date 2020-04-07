@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.chainlinkproto.dao.CLPDao;
 import com.chainlinkproto.model.Accounts;
+import com.chainlinkproto.model.Contracts;
 import com.chainlinkproto.model.IntelProperties;
 import com.chainlinkproto.model.Users;
 
@@ -36,8 +37,24 @@ public class ContractServiceImpl implements ContractService {
 	}
 
 	@Override
-	public void updateProperty(IntelProperties property) {
-		dao.updateProperty(property);
+	public List<Contracts> getContracts(Users user) {
+		List<Contracts> contractList = new ArrayList<>();
+		Set<Accounts> accounts = user.getAccounts();
+		
+		for(Accounts account: accounts) {
+			contractList.addAll(account.getContracts());
+		}
+		return contractList;
+	}
+
+	@Override
+	public IntelProperties getPropertyFromId(Integer id) {
+		return dao.getPropertyFromId(id);
+	}
+
+	@Override
+	public Contracts getContractFromId(Integer id) {
+		return dao.getContractFromId(id);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.chainlinkproto.dao;
 
 import com.chainlinkproto.model.Accounts;
+import com.chainlinkproto.model.Contracts;
 import com.chainlinkproto.model.EnterpriseAffiliates;
 import com.chainlinkproto.model.IntelProperties;
 import com.chainlinkproto.model.UserGroups;
@@ -22,5 +23,9 @@ public interface CLPDao{
 	
 	public void saveNewProperty(IntelProperties property);
 	
-	public void updateProperty(IntelProperties property);
+	public void updateAccount(Accounts account);
+	
+	public IntelProperties getPropertyFromId(Integer id);
+	
+	public Contracts getContractFromId(Integer id);
 }

@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
 	public Users getUserById(Integer id) {
 		return dao.getUserById(id);
 	}
+
+	@Override
+	public void updateAccount(Accounts account) {
+		dao.updateAccount(account);
+	}
 }

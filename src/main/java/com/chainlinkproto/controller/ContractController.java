@@ -3,14 +3,13 @@ package com.chainlinkproto.controller;
 import java.sql.Timestamp;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.web3j.crypto.Credentials;
@@ -38,7 +37,19 @@ public class ContractController {
 	@Autowired
 	BlockChainService blockChainService;
 	
-	@GetMapping("newProperty")
+	@GetMapping("/propertyInfo/{propId}")
+	public String getPropertyInfo(@PathVariable(name = "propId") String propId, Model model, HttpSession session) {
+		model.addAttribute("property", contractService.getPropertyFromId(Integer.valueOf(propId)));
+		return "propertyInfo";
+	}
+	
+	@GetMapping("/contractInfo/{contractId}")
+	public String getContractInfo(@PathVariable(name = "contractId") String contractId, Model model, HttpSession session) {
+		model.addAttribute("contract", contractService.getContractFromId(Integer.valueOf(contractId)));
+		return "contractInfo";
+	}
+	
+	@GetMapping("/newProperty")
 	public String addProperty(Model model, HttpSession session) {
 		model.addAttribute("newPropertyForm", new NewPropertyForm());
 		return "newProperty";
@@ -69,10 +80,12 @@ public class ContractController {
 				property.setMetaAlbumArt(newProperty.getMetaAlbumArt().getBytes());
 			}
 			contractService.saveNewProperty(property);
-			System.out.println(property.getId());
 			Contracts contract = blockChainService.initiateNewRoyaltyContract(Credentials.create(ECKeyPair.create(Numeric.toBigInt(user.getWalletKey()))), account, property);
+			contract.getAccounts().add(account);
 			property.getContracts().add(contract);
-			contractService.updateProperty(property);
+			account.getContracts().add(contract);
+			account.getIntelProperties().add(property);
+			userService.updateAccount(account);;
 		}catch(Exception e) {
 			e.printStackTrace();
 			redirectAttrs.addAttribute("propertySubmissionError", true);

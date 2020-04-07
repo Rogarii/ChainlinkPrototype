@@ -10,4 +10,6 @@ public interface UserService {
 	public void createNewAccount(Accounts account, Integer id);
 	
 	public Users getUserById(Integer id);
+	
+	public void updateAccount(Accounts account);
 }

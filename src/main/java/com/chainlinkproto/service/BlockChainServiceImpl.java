@@ -57,7 +57,8 @@ public class BlockChainServiceImpl implements BlockChainService{
 		contract.setDateModified(new Timestamp(System.currentTimeMillis()));
 		contract.setBcKey(royaltyContract.getContractAddress());
 		contract.getAccounts().add(account);
-		contract.getIntelProperties().add(property);		
+		contract.getIntelProperties().add(property);	
+		contract.setDeployed(false);
 		return contract;
 	}
 }

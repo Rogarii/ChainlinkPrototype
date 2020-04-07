@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.chainlinkproto.model.Contracts;
 import com.chainlinkproto.model.IntelProperties;
 import com.chainlinkproto.service.ContractService;
 import com.chainlinkproto.service.UserService;
@@ -33,4 +34,11 @@ public class DashboardController
 		model.addAttribute("intelProperties", propertyList);
 		return "properties";
 	}	
+	
+	@GetMapping("/contracts")
+	public String getContracts(Model model, HttpSession session) {
+		List<Contracts> contractList = contractService.getContracts(userService.getUserById((Integer)session.getAttribute("userId")));
+		model.addAttribute("contracts", contractList);
+		return "contracts";
+	}
 }

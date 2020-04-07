@@ -104,7 +104,7 @@ public class Accounts implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.EAGER)
 	private Set<IntelProperties> intelProperties = new HashSet<>();
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "ContractAccounts", joinColumns = { @JoinColumn(name = "AccountID") }, inverseJoinColumns = { @JoinColumn(name = "ContractID")})
 	private Set<Contracts> contracts = new HashSet<>();
 
