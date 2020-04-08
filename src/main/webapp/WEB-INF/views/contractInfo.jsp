@@ -17,7 +17,7 @@
   <body>
     <h1>Contract Info</h1>
 	    <div class="container-sm">
-	   		
+	    	
 	    </div>	
   </body>
 </html>
