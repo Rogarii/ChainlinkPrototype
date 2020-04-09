@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.chainlinkproto.model.LoginUserDetails;
 import com.chainlinkproto.model.Users;
@@ -23,25 +24,28 @@ public class LoginController {
 
 	@GetMapping("/")
 	public String home() {
-		return "home";
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpSession session) {
+		if(session.getAttribute("userId") != null) {
+			return "redirect:/dashboard";
+		}
 		return "login";
 	}
 	
 	@GetMapping("/loginFailed")
-	public String loginFailed(Model model) {
-		model.addAttribute("loginError", true);
-		return "login";
+	public String loginFailed(Model model, HttpSession session, RedirectAttributes redirectAttrs) {
+		redirectAttrs.addFlashAttribute("loginError", true);
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/logout")
 	public String logout(SessionStatus session) {
 		SecurityContextHolder.getContext().setAuthentication(null);
 		session.setComplete();
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	@PostMapping("/postLogin")

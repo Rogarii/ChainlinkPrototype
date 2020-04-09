@@ -19,18 +19,37 @@
     		background-repeat: no-repeat;
     		background-size: cover;
     	}
+    	.card, .alert{
+    		background-color: rgba(245, 245, 245, 0.75) !important;
+    		box-shadow: 5px 5px;
+    		border: 2px solid black;
+    	}
     </style>
   </head>
-  <body>
-    <div class="contrainer-fluid m-3">
+  <body>		
+    <div class="m-3">
+		<c:if test="${accountCreation}">
+	  		<div class="alert alert-secondary alert-dismissible fade show" role="alert" id="accountCreateAlert">
+			  	<span>${accountType} Account Setup Successfully!</span>
+			  	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<script>
+				var dismiss = function(){
+					$("#accountCreateAlert").alert('close');
+					}
+				setTimeout(dismiss, 5000);
+			</script>
+	  	</c:if>
     	<div class="row">
-    		<div class="col ">
+    		<div class="col">
     			<a href="doLogout" class="btn btn-danger">Logout</a>
     		</div>
     	</div>
     	<div class="row mt-3 mx-auto" style="width: 40%;">
-    		<div class="col p-1">
-    			<div class="card" >
+    		<div class="col p-1 m-1">
+    			<div class="card text-center" >
     				<img src="<c:url value="/images/music.png"/>" class="card-img-top mx-auto mt-2" style="max-height: 175px; max-width: 175px; width: auto; height: auto;">
     				<div class="card-body">
     					<h5 class="card-title">My Music (Properties)</h5>
@@ -38,8 +57,8 @@
     				</div>
     			</div>
     		</div>
-    		<div class="col p-1">
-    			<div class="card ">
+    		<div class="col p-1 m-1">
+    			<div class="card text-center">
     				<img src="<c:url value="/images/options.png"/>" class="card-img-top mx-auto mt-2" style="max-height: 175px; max-width: 175px; width: auto; height: auto;">
     				<div class="card-body">
     					<h5 class="card-title">My Account</h5>
@@ -49,8 +68,8 @@
     		</div>
     	</div>
     	<div class="row mx-auto" style="width: 40%;">
-    		<div class="col p-1">
-    			<div class="card" >
+    		<div class="col p-1 m-1">
+    			<div class="card text-center" >
     				<img src="<c:url value="/images/contract.png"/>" class="card-img-top mx-auto mt-2" style="max-height: 175px; max-width: 175px; width: auto; height: auto;">
     				<div class="card-body">
     					<h5 class="card-title">My Contracts</h5>
@@ -58,8 +77,8 @@
     				</div>
     			</div>
     		</div>
-    		<div class="col p-1">
-    			<div class="card">
+    		<div class="col p-1 m-1">
+    			<div class="card text-center">
     				<img src="<c:url value="/images/chart.png"/>" class="card-img-top mx-auto mt-2" style="max-height: 175px; max-width: 175px; width: auto; height: auto;">
     				<div class="card-body">
     					<h5 class="card-title">Recent Activity</h5>
