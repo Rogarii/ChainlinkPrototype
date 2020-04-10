@@ -160,8 +160,8 @@
 					    					<p><sup>Fax Number if you would like to receive information over a Fax Machine</sup></p>
 					    					<form:input path="fax" class="form-control" placeholder="Fax Number" type="text"/>
 					    				</div>
-					    				<div class="form-group">
-					    					<button type="submit" class="btn btn-primary">Submit</button>
+					    				<div class="form-group mx-auto" style="width: 50px;">
+					    					<button type="submit" class="btn btn-outline-primary mt-3">Submit</button>
 					    				</div>
 					    			</div>
 					    		</div>

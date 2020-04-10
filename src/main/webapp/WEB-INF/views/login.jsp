@@ -12,6 +12,7 @@
 		<script defer src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	    <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	    <script src="https://kit.fontawesome.com/b572e6d222.js" crossorigin="anonymous"></script>
 	    <title>ChainlinkPrototype - LOGIN</title>
 	    <style>
 	    	body{
@@ -31,6 +32,11 @@
 	</head>
   	<body>
 		<div class="m-3">
+			<div class="row">
+	    		<div class="col">
+	    			<a href="/ChainlinkPrototype/" class="btn btn-danger"><i class="fas fa-home"></i></a>
+	    		</div>
+    		</div>
 		  	<div class="row mx-auto mt-5" style="width: 25%;">
 			  	<div class="col p-1">
 			  		<div class="card p-1">
@@ -44,7 +50,7 @@
 			    					<div class="col">
 			    						<div class="form-group ">
 			    							<label for="emailInput">Email Address</label>
-			    							<input type = "email" class="form-control" id="emailInput" placeholder="Email Address" name="username">
+			    							<input type = "email" class="form-control" id="emailInput" placeholder="Email Address" name="username" required>
 			    						</div>
 			    					</div>
 			    				</div>
@@ -52,7 +58,7 @@
 			    					<div class="col">
 					    				<div class="form-group">
 					    					<label for="passwordInput">Password</label>
-					    					<input type ="password" class="form-control" id="passwordInput" placeholder="Password" name="password">
+					    					<input type ="password" class="form-control" id="passwordInput" placeholder="Password" name="password" required>
 					    				</div>				
 				    				</div>
 				    			</div>
