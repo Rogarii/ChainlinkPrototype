@@ -80,7 +80,7 @@
 			 										<button class="btn btn-sm btn-outline-primary float-right ml-1" title="Show More" type="button" data-toggle="collapse" data-target="#${prop.id}collapse" aria-expanded="false" aria-controls="${prop.id}collapse" id="${prop.id}button"><i class="fas fa-chevron-down"></i></button>
 			 										<button class="btn btn-sm btn-outline-primary float-right dropdown-toggle" title="Options" type="button" id="${prop.id}dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>
 			 										<div class="dropdown-menu" aria-labelledby="${prop.id}dropdown">
-			 											<a class="dropdown-item" href="#">View Property</a>
+			 											<a class="dropdown-item" href="propertyInfo/${prop.id}">View Property</a>
 			 											<a class="dropdown-item" href="#">Edit Property</a>
 			 											<a class="dropdown-item" href="#">Delete Property</a>
 			 										</div>

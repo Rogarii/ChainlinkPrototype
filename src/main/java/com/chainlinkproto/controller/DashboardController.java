@@ -39,6 +39,10 @@ public class DashboardController
 	public String getContracts(Model model, HttpSession session) {
 		List<Contracts> contractList = contractService.getContracts(userService.getUserById((Integer)session.getAttribute("userId")));
 		model.addAttribute("contracts", contractList);
+		for(Contracts contract: contractList) {
+			model.addAttribute("properties" + contract.getId(), contract.getIntelProperties().toArray());
+			model.addAttribute("users" + contract.getId(), contract.getAccounts().toArray());
+		}
 		return "contracts";
 	}
 }

@@ -50,10 +50,10 @@ public class Contracts implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "contract", fetch = FetchType.EAGER)
 	private Set<UserInbox> userInbox = new HashSet<>();
 	
-	@ManyToMany(mappedBy = "contracts")
+	@ManyToMany(mappedBy = "contracts", fetch=FetchType.EAGER)
 	private Set<Accounts> accounts = new HashSet<>();
 	
-	@ManyToMany(mappedBy = "contracts")
+	@ManyToMany(mappedBy = "contracts", fetch=FetchType.EAGER)
 	private Set<IntelProperties> intelProperties = new HashSet<>();
 
 	public Integer getId() {

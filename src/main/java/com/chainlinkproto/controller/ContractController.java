@@ -2,6 +2,8 @@ package com.chainlinkproto.controller;
 
 import java.sql.Timestamp;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
@@ -41,6 +44,34 @@ public class ContractController {
 	public String getPropertyInfo(@PathVariable(name = "propId") String propId, Model model, HttpSession session) {
 		model.addAttribute("property", contractService.getPropertyFromId(Integer.valueOf(propId)));
 		return "propertyInfo";
+	}
+	
+	@GetMapping("/propertyComp/{propId}")
+	public @ResponseBody void getPropertyComp(HttpServletRequest request, HttpServletResponse response, @PathVariable(name = "propId") String propId) {
+		IntelProperties property = contractService.getPropertyFromId(Integer.valueOf(propId));
+		byte[] file = property.getCompData();
+		response.reset();
+		//TODO save file type and modify accordingly
+		response.setContentType("text/plain");
+		try {
+			response.getOutputStream().write(file);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@GetMapping("/propertyLyrics/{propId}")
+	public @ResponseBody void getPropertyLyrics(HttpServletRequest request, HttpServletResponse response, @PathVariable(name = "propId") String propId) {
+		IntelProperties property = contractService.getPropertyFromId(Integer.valueOf(propId));
+		byte[] file = property.getLyricsData();
+		response.reset();
+		//TODO save file type and modify accordingly
+		response.setContentType("text/plain");
+		try {
+			response.getOutputStream().write(file);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@GetMapping("/contractInfo/{contractId}")
