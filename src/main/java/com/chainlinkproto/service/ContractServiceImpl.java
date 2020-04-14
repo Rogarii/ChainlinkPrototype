@@ -33,7 +33,7 @@ public class ContractServiceImpl implements ContractService {
 
 	@Override
 	public void saveNewProperty(IntelProperties property) {
-		dao.saveNewProperty(property);
+		dao.saveProperty(property);
 	}
 
 	@Override

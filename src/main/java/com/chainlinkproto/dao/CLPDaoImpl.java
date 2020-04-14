@@ -78,9 +78,13 @@ public class CLPDaoImpl implements CLPDao {
 	}
 
 	@Override
-	public void saveNewProperty(IntelProperties property) {
+	public void saveProperty(IntelProperties property) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(property);
+		if(property.getId() != null) {
+			session.merge(property);
+		}else {
+			session.persist(property);
+		}
 	}
 
 	@Override

@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class NewPropertyForm implements Serializable {
 
 	private static final long serialVersionUID = -3166941716699838289L;
+	
+	private String id;
 
 	private String propName;
 	
@@ -136,5 +138,13 @@ public class NewPropertyForm implements Serializable {
 
 	public void setMetaAlbumArt(MultipartFile metaAlbumArt) {
 		this.metaAlbumArt = metaAlbumArt;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

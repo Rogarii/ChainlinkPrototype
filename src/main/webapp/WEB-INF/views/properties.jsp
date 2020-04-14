@@ -81,7 +81,7 @@
 			 										<button class="btn btn-sm btn-outline-primary float-right dropdown-toggle" title="Options" type="button" id="${prop.id}dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i></button>
 			 										<div class="dropdown-menu" aria-labelledby="${prop.id}dropdown">
 			 											<a class="dropdown-item" href="propertyInfo/${prop.id}">View Property</a>
-			 											<a class="dropdown-item" href="#">Edit Property</a>
+			 											<a class="dropdown-item" href="editProperty/${prop.id}">Edit Property</a>
 			 											<a class="dropdown-item" href="#">Delete Property</a>
 			 										</div>
 			 									</div>		

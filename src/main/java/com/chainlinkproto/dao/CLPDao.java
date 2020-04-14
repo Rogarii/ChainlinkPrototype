@@ -21,7 +21,7 @@ public interface CLPDao{
 	
 	public EnterpriseAffiliates getEnterpriseById(Integer id);
 	
-	public void saveNewProperty(IntelProperties property);
+	public void saveProperty(IntelProperties property);
 	
 	public void updateAccount(Accounts account);
 	
